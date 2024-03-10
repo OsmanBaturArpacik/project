@@ -1,7 +1,6 @@
 package com.javagps.core.model;
 
 import org.springframework.stereotype.Component;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Connection;

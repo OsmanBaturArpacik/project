@@ -18,11 +18,12 @@ public class JwtConfiguration {
                 .setSubject(userId)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
-                .claim("role", "admin") // Özel claim
-                .claim("email", "user@example.com") // Özel claim
+                .claim("role", "admin") // special claim
+                .claim("email", "user@example.com") // special claim
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
                 .compact();
     }
+    // claims; role, username or userid, maybe ip,
 
     public static boolean isValid(String jwtToken) {
         try {

@@ -4,5 +4,5 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Queries {
-    public static final String getUserPass = "SELECT * FROM tbl_users WHERE username=? AND password=?";
+    public static final String LOGIN_QUERY = "SELECT * FROM tbl_users WHERE username=? AND password=?";
 }
