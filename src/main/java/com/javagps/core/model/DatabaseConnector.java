@@ -12,7 +12,7 @@ public class DatabaseConnector {
     @Autowired
     public static Connection connectDb() {
         try {
-            Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/mynotes","root","");
+            Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/project","root","");
             return connect;
         }
         catch(Exception ex) {

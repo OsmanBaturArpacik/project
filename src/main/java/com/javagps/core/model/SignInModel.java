@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Data
 @Service
-public class SignModel {
+public class SignInModel {
     private String username;
     private String password;
     public String getUsername() {

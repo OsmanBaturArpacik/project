@@ -1,7 +1,7 @@
 package com.javagps.core.service;
 
 import com.javagps.core.model.DatabaseConnector;
-import com.javagps.core.model.SignModel;
+import com.javagps.core.model.SignInModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,39 +12,41 @@ import java.sql.Statement;
 
 @Service
 public class SignInService {
-    private final SignModel signModel;
+    private final SignInModel signInModel;
     private Connection connection;
     private Statement statement;
     private PreparedStatement preparedStatement;
     private ResultSet resultSet;
+    public static final String CHECK_USERNAME_PASSWORD = "SELECT * FROM tbl_users WHERE username=? AND password=?";
+
 
     @Autowired
-    public SignInService(SignModel signModel) {
-        this.signModel = signModel;
+    public SignInService(SignInModel signInModel) {
+        this.signInModel = signInModel;
     }
 
-    public void setLogin(String username, String password) {
-        signModel.setUsername(username);
-        signModel.setPassword(password);
+    public void setSignInModel(String username, String password) {
+        signInModel.setUsername(username);
+        signInModel.setPassword(password);
     }
 
 //    public LoginService(String username, String password) {
 //        login = new Login(username, password);
 //    }
 
-    public boolean isValid(String query) {
+    public boolean isValid() {
         try {
             connection = DatabaseConnector.connectDb();
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, signModel.getUsername());
-            preparedStatement.setString(2, signModel.getPassword());
+            preparedStatement = connection.prepareStatement(CHECK_USERNAME_PASSWORD);
+            preparedStatement.setString(1, signInModel.getUsername());
+            preparedStatement.setString(2, signInModel.getPassword());
             resultSet = preparedStatement.executeQuery();
 
             if(resultSet.next()) {
                 return true;
             }
         }
-        catch(Exception ex) {
+        catch (Exception ex) {
             ex.printStackTrace();
         }
         return false;
